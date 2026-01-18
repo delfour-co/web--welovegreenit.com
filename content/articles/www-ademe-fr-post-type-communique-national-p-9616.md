@@ -1,0 +1,56 @@
+---
+title: "CENTRES DE DONNÉES NUMERIQUES : PERSPECTIVES D’ÉVOLUTION DE LEURS CONSOMMATIONS"
+date: 2026-01-06T16:17:11.000Z
+source: "ADEME"
+language: "fr"
+link: "https://www.ademe.fr/presse/communique-national/centres-de-donnees-numeriques-perspectives-devolution-de-leurs-consommations/"
+description: "L’essor du numérique, porté actuellement par l’intelligence artificielle, s’accompagne d’une multiplication des centres de données numériques (data centers), dont l’implantation soulève des enjeux économiques et stratégiques. Ces infrastructures, très énergivores, consomment de grandes quantités d’é..."
+author: "france"
+guid: "https://www.ademe.fr/?post_type=communique-national&p=9616"
+categories:
+  - "transition écologique"
+  - "numérique responsable"
+  - "politique publique"
+draft: false
+---
+
+L’essor du numérique, porté actuellement par l’intelligence artificielle, s’accompagne d’une multiplication des centres de données numériques (data centers), dont l’implantation soulève des enjeux économiques et stratégiques. Ces infrastructures, très énergivores, consomment de grandes quantités d’électricité pour alimenter et refroidir les serveurs : 415 TWh à l’échelle mondiale en 2024, avec une hausse attendue. Face à ces défis, l’ADEME publie une prospective sur l’évolution de la consommation des data centers en France jusqu’en 2060. Elle propose un état des lieux, un modèle détaillé et cinq scénarios pour anticiper les impacts et accompagner la transition numérique dans la transition écologique. Dans le scénario tendanciel, la consommation d’électricité induite par les usages français pourrait progresser d’un facteur 3,7 d’ici 2035, dont les 2/3 auraient lieu à l’étranger, dans des pays dont les mix électriques sont en moyenne beaucoup plus carbonés qu’en France.
+
+Un phénomène sans commune-mesure : 5 scénarios contrastés pour anticiper la croissance des usages du numériques
+
+L’étude menée par l’ADEME révèle plusieurs enseignements majeurs. L’accroissement de l’offre de services numériques et leur adoption massive entraînent une hausse inévitable de la consommation d’électricité des centres de données. Parmi les signaux forts d’évolution, l’usage croissant de l’intelligence artificielle apparaît comme le principal moteur de cette dynamique. La blockchain, reste encore limitée en France mais pourrait connaître une progression rapide dans les années à venir. Par ailleurs, le numérique continue de générer et d’analyser des données grâce au dialogue machine à machine, s’affranchissant de la barrière de l’individu. Enfin, la consommation électrique des centres de données en France pourrait également augmenter en raison de leur rôle stratégique dans la souveraineté numérique et la défense.
+
+La modélisation prospective a permis de distinguer les évolutions pour 5 scénarios inspirés de l’exercice de prospective Transition(s) 2050, sur 2 périodes clés (pré-2035 et post-2035). En résumé :
+
+Tendanciel – Ce scénario rend compte de l’évolution potentielle des consommations électriques des centres de données pour les usages des Français, dans le cas où les tendances actuelles perdureraient : forte croissance liée à l’adoption massive de nouveaux usages et la diversification de l’oﬀre de services numériques, principalement liée à l’IA, la blockchain, et l’évolution de la typologie des centres de données vers de très grands centres appelés hyperscale. Dans ce scénario, la croissance des centres de données sur le territoire français est soutenue, mais la consommation des traitements informatiques induits par les usages des Français se développe proportionnellement plus rapidement encore. Ce scénario illustre que, sans évolution, la consommation d’électricité induite par les usages français pourrait progresser d’un facteur 3,7 d’ici 2035, dont les 2/3 auront lieu à l’étranger, dans des pays dont les mix électriques sont en moyenne beaucoup plus carbonés qu’en France.
+
+Génération Frugale – Scénario le plus engagé dans la sobriété parmi les 4 scénarios modélisés, inspirés de l’exercice « Transition(s) 2050 », « Génération Frugale » envisage une dénumérisation de certains usages du numérique, en particulier les usages les plus gourmands et ceux qui contraignent les usagers à l’adoption du tout numérique, et en proposant des services collectifs alternatifs non numériques ou faiblement numériques. Dans ce scénario, les usages de l’IA continuent de se développer, mais moins rapidement que dans les autres scénarios. Dans Génération Frugale, la réorientation des modes de vie et l’écoconception numérique permettent de réduire de façon très significative les calculs numériques liés aux usages français, au point où, malgré l’hypothèse d’un moratoire sur la construction de nouveaux centres de données, la dépendance de la France aux traitements numériques calculés hors de son territoire se réduit elle aussi très fortement.
+
+Coopérations Territoriales – Dans ce scénario, les projets de centres de données sont développés en concertation avec les territoires et encadrés par des normes qui limitent leur implantation, sans toutefois aller jusqu’à la mise en place d’un moratoire ; comme dans le scénario précédent, les centres de données sont incités à cibler avant tout les usages considérés comme prioritaires : bénéfiques pour la santé, l'environnement et la société. Les pouvoirs publics facilitent l’adoption de pratiques plus sobres, tout en laissant à chacune et chacun la liberté de rester connecté. Le scénario Coopérations Territoriales est celui qui favorise le plus les synergies entre l’implantation des centres de données et les enjeux d’un territoire.
+
+Technologies Vertes – Dans ce scénario, les centres de données sont un des points d’appui stratégiques de la transition, en favorisant l’innovation technologiques pour réduire les émissions d’autres secteurs d’activité et optimiser les consommations du numérique. Dans ce scénario, les politiques publiques incitent à l’implantation de centres de données sur le territoire français, à la fois pour des questions de souveraineté numérique, mais aussi en valorisant le mix électrique français, peu carboné. Dans Technologies Vertes, sont particulièrement favorisés les projets d’implantation de centres de données ayant vocation à héberger des projets technologiques porteurs de solutions pour la transition écologique. Dans cette logique, ce scénario voit un développement relativement important de la blockchain et de l’IA.
+
+Pari Réparateur – Dans ce scénario, le pari est fait que les innovations technologiques permettraient de conserver notre mode de vie à travers une compensation de ses impacts ; ce scénario envisage le développement des usages des centres de données avec une réglementation allégée et une organisation des territoires pour satisfaire la demande plutôt que l’inverse ; les centres de données entrent en compétition avec les autres industries pour l’usage de l’électricité dans le cadre de la transition. Là où le scénario Technologies Vertes envisage des politiques publiques incitant à l’implantation de centres de données sur le territoire français dans une volonté de développer sa souveraineté, Pari Réparateur envisage des politiques publiques similaires mais à l’échelle européenne : est pris pour hypothèse dans ce scénario une dilution relative de l’implantation des centres de données, avec un développement moindre sur le sol français dans ce scénario en comparaison du scénario précédent. Ce scénario explore aussi l’hypothèse d’un développement très important de la blockchain dans les usages des Français. 
+
+Selon les scénarios, les consommations d’électricité française des datacenters en 2060 vont d’une division par 2 par rapport à aujourd’hui, à une multiplication par un facteur 7.
+
+Le potentiel de récupération de la chaleur fatale au cœur des enjeux
+
+L’étude estime le potentiel de récupération de la chaleur émise par les centres de données en fonction des scénarios définis dans le modèle prospectif. Le potentiel brut correspond à la quantité totale d’énergie émise sous forme de chaleur dans un centre de données, principalement la consommation électrique de la partie IT. Le potentiel net de récupération correspond au potentiel brut, pondéré par l’efficacité actuelle et future des technologies de récupération de chaleur et par la capacité à trouver des débouchés. 
+
+Cette efficacité augmente avec l’amélioration des techniques de captation et des débouchés plus atteignables, ce qui améliore le potentiel net. Ainsi, l’utilisation du liquid cooling, déjà présente dans certaines salles informatiques, permet de récupérer plus facilement la chaleur des serveurs à une température plus élevée et valorisable.
+
+Ce potentiel reste toutefois théorique : à ce jour, très peu de centres de données français récupèrent réellement la chaleur fatale. Les projections ne tiennent pas compte de l’intérêt économique ni des contraintes locales, qui réduisent la probabilité d’une telle récupération. Selon les scénarios, le potentiel net passe de 1,77 TWh en 2024 à des valeurs comprises entre 4,09 TWh (Génération Frugale) et 12,94 TWh (Tendanciel) en 2035.
+
+La trajectoire vers le Zéro Emission Nette 
+
+En raison de la forte dépendance aux traitements numériques ayant lieu à l’étranger, la forte expansion des consommations des centres de données dans le scénario tendanciel entraînerait un accroissement important des émissions de GES, incompatible avec l’Accord de Paris et la trajectoire SBTI du secteur numérique. Les autres scénarios, inspirés de Transition(s) 2050 visent à atteindre le Zéro Émissions Nette en 2050 sur le périmètre France, en mobilisant des mesures variées. 
+
+Pour les scénarios Technologies Vertes et Pari Réparateur, l’augmentation de la consommation électrique doit être anticipée et planifiée pour répondre à des usages croissants. Si la transition numérique est encouragée et ses bénéfices visibles, les émissions des centres de données restent significatives et nécessitent une compensation importante. Les optimisations technologiques, comme l’efficacité et la récupération de chaleur fatale, ne suffiront pas à stabiliser la croissance sans une politique active de sobriété des services numériques. L’empreinte liée aux émissions importées demeure également très élevée.
+
+À l’inverse, les scénarios Génération Frugale et Coopérations Territoriales montrent qu’une politique de sobriété volontariste permettrait de réduire les consommations futures et l’empreinte globale des centres de données. Ces politiques, de nature systémique, nécessitent la mobilisation conjointe des pouvoirs publics, des entreprises et des citoyens, avec des effets graduels sur plusieurs années.
+
+Méthodologie
+Cette étude a rassemblé un large Comité de Pilotage composé de représentants du ministère de la transition écologique, du ministère de l’économie et des finances, de l’ARCEP, de RTE, d’Enedis, de France Data Center et de différents services de l’ADEME. Les résultats sont le fruit du travail de collecte, d’analyse, de modélisation, de scénarisation et de concertation réalisé par le consortium CLIK pour l’ADEME. 
+
+L’article CENTRES DE DONNÉES NUMERIQUES : PERSPECTIVES D’ÉVOLUTION DE LEURS CONSOMMATIONS  est apparu en premier sur Agence de la transition écologique.

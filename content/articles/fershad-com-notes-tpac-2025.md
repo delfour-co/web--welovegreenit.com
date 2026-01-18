@@ -1,0 +1,18 @@
+---
+title: "Meet me at TPAC 2025"
+date: 2025-10-23T00:00:00.000Z
+source: "Fershad Irani"
+language: "en"
+link: "https://fershad.com/notes/tpac-2025/"
+description: "I'm really excited to be heading to Kobe, Japan next month for the W3C's annual TPAC conference. I'll be there as an individual invited expert, and am looking forwards to meeting some of the folks working in the Sustainable Web Interest Group in person. I'm also hopeful that my introvertedness won't..."
+guid: "https://fershad.com/notes/tpac-2025/"
+categories:
+  - "web sustainability"
+  - "performance"
+  - "green web"
+draft: false
+---
+
+I'm really excited to be heading to Kobe, Japan next month for the W3C's annual TPAC conference. I'll be there as an individual invited expert, and am looking forwards to meeting some of the folks working in the Sustainable Web Interest Group in person. I'm also hopeful that my introvertedness won't get in the way of me having conversations with folks working across other W3C working groups, interest groups, and community groups who's knowledge might help unlock some of the projects we've got bubbling away at the Green Web Foundation.
+
+If you'll be in Kobe from November 10 - 14 let me know, it'd be great to meet up!

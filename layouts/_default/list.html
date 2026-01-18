@@ -1,0 +1,38 @@
+{{ define "main" }}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Hero Section -->
+    <div class="mb-12 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+            Là où les passionnés du Green IT se réunissent
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Découvrez les dernières actualités sur le développement durable, l'écologie numérique et la transition énergétique
+        </p>
+    </div>
+
+    <!-- Bouton pour ouvrir les filtres (mobile) -->
+    <button
+        id="open-sidebar"
+        class="lg:hidden mb-4 flex items-center space-x-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+    >
+        <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+        </svg>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Filtres</span>
+    </button>
+
+    <!-- Bouton pour rouvrir les filtres (desktop, quand masqués) -->
+    <button
+        id="open-sidebar-desktop"
+        class="hidden lg:flex mb-4 items-center space-x-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+    >
+        <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+        </svg>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Afficher les filtres</span>
+    </button>
+
+    <!-- Articles Grid -->
+    {{ partial "article-list.html" . }}
+</div>
+{{ end }}

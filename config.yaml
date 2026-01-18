@@ -1,0 +1,113 @@
+baseURL: 'https://welovegreenit.com/'
+languageCode: 'fr'
+title: 'We Love Green IT'
+description: "Le portail francophone du numérique responsable : actualités, métiers, guides pratiques, ressources et glossaire pour maîtriser le Green IT"
+
+# Taxonomies pour les catégories et sources
+taxonomies:
+  category: categories
+  source: sources
+
+# Paramètres du site
+params:
+  theme: 'default'
+  author: 'We Love Green IT'
+  keywords: 'Green IT, numérique responsable, éco-conception, sobriété numérique, développement durable, RSE numérique'
+
+# Configuration de build
+build:
+  writeStats: true
+
+# Générer des URLs vraiment relatives qui fonctionnent depuis n'importe quel chemin
+relativeURLs: true
+
+# Configuration des menus
+menu:
+  main:
+    - identifier: home
+      name: Actualités
+      url: /
+      weight: 1
+    - identifier: metiers
+      name: Métiers
+      url: /metiers/
+      weight: 2
+    - identifier: guides
+      name: Guides
+      url: /guides/
+      weight: 3
+    - identifier: ressources
+      name: Ressources
+      url: /ressources/
+      weight: 4
+    - identifier: glossaire
+      name: Glossaire
+      url: /glossaire/
+      weight: 5
+    - identifier: about
+      name: À propos
+      url: /about/
+      weight: 6
+
+# Configuration des formats de sortie
+outputs:
+  home:
+    - HTML
+    - RSS
+
+# Sitemap configuration
+sitemap:
+  changefreq: weekly
+  priority: 0.5
+  filename: sitemap.xml
+  # Priorités par section
+  sections:
+    articles:
+      changefreq: daily
+      priority: 0.8
+    guides:
+      changefreq: monthly
+      priority: 0.9
+    metiers:
+      changefreq: monthly
+      priority: 0.7
+    ressources:
+      changefreq: monthly
+      priority: 0.7
+    glossaire:
+      changefreq: monthly
+      priority: 0.6
+
+
+# Markup
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: github
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    noClasses: false
+
+# Assets processing
+minify:
+  tdewolff:
+    css:
+      keepCSS2: true
+    js:
+      keepVarNames: true
+    html:
+      keepConditionalComments: true
+
+# PostCSS configuration (Hugo will automatically process assets/css/*.css with PostCSS if postcss.config.js exists)
+
+# Configuration de sécurité
+security:
+  funcs:
+    getenv:
+      - '^HUGO_'
+      - '^CI$'
+      - '^GIT_COMMIT_HASH$'

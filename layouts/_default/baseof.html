@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr" class="h-full">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="W♥️GI" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hugo" />
+    <title>{{ if .IsHome }}{{ .Site.Title }} - Le portail du numérique responsable{{ else }}{{ .Title }} | {{
+        .Site.Title }}{{ end }}</title>
+
+    {{ partial "seo.html" . }}
+
+    {{ $css := resources.Get "css/main.css" }}
+    {{ if $css }}
+    {{ $css = $css | postCSS | minify | fingerprint }}
+    <link rel="preload" href="{{ $css.RelPermalink }}" as="style" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" media="all">
+    {{ end }}
+
+    {{/* Resource hints pour améliorer les performances */}}
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    <script>
+        // Appliquer le thème avant le rendu pour éviter le flash
+        (function () {
+            const theme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            if (theme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+        })();
+
+        // Appliquer les préférences d'accessibilité avant le rendu
+        (function () {
+            try {
+                const prefs = localStorage.getItem('accessibility-preferences');
+                if (prefs) {
+                    const settings = JSON.parse(prefs);
+                    const root = document.documentElement;
+                    const values = {
+                        fontSize: { small: 0.875, normal: 1, large: 1.125 },
+                        lineHeight: { tight: 1.3, normal: 1.5, loose: 2 },
+                        letterSpacing: { tight: '-0.025em', normal: '0em', wide: '0.075em' },
+                        wordSpacing: { tight: '-0.025em', normal: '0em', wide: '0.15em' }
+                    };
+                    root.style.setProperty('--font-size-multiplier', values.fontSize[settings.fontSize] || 1);
+                    root.style.setProperty('--line-height-value', values.lineHeight[settings.lineHeight] || 1.5);
+                    root.style.setProperty('--letter-spacing-value', values.letterSpacing[settings.letterSpacing] || '0em');
+                    root.style.setProperty('--word-spacing-value', values.wordSpacing[settings.wordSpacing] || '0em');
+                    if (settings.highContrast) root.setAttribute('data-contrast', 'high');
+                    if (settings.dyslexiaFont) {
+                        root.setAttribute('data-dyslexia-font', 'true');
+                        // Charger la police de manière asynchrone pour ne pas bloquer le rendu
+                        var link = document.createElement('link');
+                        link.id = 'dyslexia-font-link';
+                        link.rel = 'stylesheet';
+                        link.href = 'https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.2.5/index.min.css';
+                        link.media = 'print';
+                        link.crossOrigin = 'anonymous';
+                        link.onload = function() { this.media = 'all'; };
+                        document.head.appendChild(link);
+                    }
+                }
+            } catch (e) { console.warn('Accessibility preferences error:', e); }
+        })();
+    </script>
+</head>
+
+<body class="min-h-full bg-gray-50 dark:bg-gray-900 antialiased">
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    {{ partial "header.html" . }}
+
+    <div class="relative">
+        {{ if or .IsHome (eq .Section "articles") }}
+        {{ partial "article-filters.html" . }}
+        {{ end }}
+
+        <div id="sidebar-overlay"
+            class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 z-30 lg:hidden hidden transition-opacity duration-300">
+        </div>
+
+        <main id="main-content">
+            {{ block "main" . }}{{ end }}
+        </main>
+    </div>
+
+    {{ partial "footer.html" . }}
+
+    {{ partial "accessibility-modal.html" . }}
+
+    {{ $mainJs := resources.Get "js/main.js" }}
+    {{ if $mainJs }}
+    {{ $mainJs = $mainJs | minify | fingerprint }}
+    <script src="{{ $mainJs.RelPermalink }}" integrity="{{ $mainJs.Data.Integrity }}" crossorigin="anonymous" defer></script>
+    {{ else }}
+    <script src="/js/main.js" defer></script>
+    {{ end }}
+</body>
+
+</html>

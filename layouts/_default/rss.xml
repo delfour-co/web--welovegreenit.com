@@ -1,0 +1,33 @@
+{{- $pages := where .Site.RegularPages "Section" "articles" -}}
+{{- $pages = $pages | first 50 -}}
+{{- $pages = $pages.ByDate.Reverse -}}
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}</description>
+    <generator>Hugo -- gohugo.io</generator>
+    {{ with .Site.LanguageCode }}<language>{{.}}</language>{{end}}
+    {{ with .Site.Copyright }}<copyright>{{.}}</copyright>{{end}}
+    {{ if not .Date.IsZero }}<lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+    {{ with .OutputFormats.Get "RSS" }}
+        {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{ end }}
+    {{ range $pages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Params.link | default .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{ with .Params.author }}<author>{{.}}</author>{{end}}
+      <guid isPermaLink="false">{{ .Params.guid | default .Permalink }}</guid>
+      <description>{{ .Params.description | default .Summary | html }}</description>
+      {{ if .Params.image }}
+      <enclosure url="{{ .Params.image }}" type="image/jpeg"/>
+      {{ end }}
+      {{ with .Params.source }}<category>{{.}}</category>{{end}}
+      {{ range .Params.categories }}<category>{{.}}</category>{{end}}
+    </item>
+    {{ end }}
+  </channel>
+</rss>

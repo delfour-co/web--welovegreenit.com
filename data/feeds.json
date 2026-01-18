@@ -1,0 +1,116 @@
+[
+  {
+    "url": "https://greenit.fr/feed/",
+    "name": "GreenIT.fr",
+    "language": "fr",
+    "categories": ["green it", "numérique responsable", "sobriété numérique", "écoconception"]
+  },
+  {
+    "url": "https://greenersoft.fr/rss",
+    "name": "GreenerSoft",
+    "language": "fr",
+    "categories": ["green it", "logiciel responsable", "écoconception", "sobriété numérique"]
+  },
+  {
+    "url": "https://institutnr.org/feed/",
+    "name": "Institut du Numérique Responsable",
+    "language": "fr",
+    "categories": ["green it", "numérique responsable", "gouvernance", "sobriété numérique"]
+  },
+  {
+    "url": "https://theshiftproject.org/feed/",
+    "name": "The Shift Project",
+    "language": "fr",
+    "categories": ["sobriété numérique", "transition énergétique", "climat"]
+  },
+  {
+    "url": "https://www.halteobsolescence.org/feed/",
+    "name": "HOP - Halte à l'Obsolescence Programmée",
+    "language": "fr",
+    "categories": ["obsolescence programmée", "durabilité", "réparation"]
+  },
+  {
+    "url": "https://www.thegreenwebfoundation.org/feed/",
+    "name": "The Green Web Foundation",
+    "language": "en",
+    "categories": ["green web", "sustainable internet", "renewable energy"]
+  },
+  {
+    "url": "https://www.wholegraindigital.com/feed/",
+    "name": "Wholegrain Digital",
+    "language": "en",
+    "categories": ["sustainable web", "écoconception", "green hosting"]
+  },
+  {
+    "url": "https://www.mightybytes.com/feed/",
+    "name": "Mightybytes",
+    "language": "en",
+    "categories": ["sustainable web", "B Corp", "digital sustainability"]
+  },
+  {
+    "url": "https://branch.climateaction.tech/feed/",
+    "name": "Branch Magazine",
+    "language": "en",
+    "categories": ["sustainable internet", "climate tech", "green software"]
+  },
+  {
+    "url": "https://solar.lowtechmagazine.com/feeds/all-en.atom.xml",
+    "name": "Low-Tech Magazine",
+    "language": "en",
+    "categories": ["low-tech", "sobriété", "énergie"]
+  },
+  {
+    "url": "https://climateaction.tech/feed/",
+    "name": "ClimateAction.tech",
+    "language": "en",
+    "categories": ["climate tech", "sustainable tech", "community"]
+  },
+  {
+    "url": "https://www.fershad.com/feed.xml",
+    "name": "Fershad Irani",
+    "language": "en",
+    "categories": ["web sustainability", "performance", "green web"]
+  },
+  {
+    "url": "https://signal.eu.org/blog/feed/",
+    "name": "Standblog (Tristan Nitot)",
+    "language": "fr",
+    "categories": ["numérique responsable", "vie privée", "sobriété"]
+  },
+  {
+    "url": "https://www.24joursdeweb.fr/feed/",
+    "name": "24 Jours de Web",
+    "language": "fr",
+    "categories": ["web", "accessibilité", "écoconception"]
+  },
+  {
+    "url": "https://www.ademe.fr/presse/communique-national/feed/",
+    "name": "ADEME",
+    "language": "fr",
+    "categories": ["transition écologique", "numérique responsable", "politique publique"]
+  },
+  {
+    "url": "https://www.silicon.fr/feed",
+    "name": "Silicon.fr",
+    "language": "fr",
+    "categories": ["tech", "numérique", "innovation", "IT"]
+  },
+  {
+    "url": "https://www.w3.org/blog/feed/",
+    "name": "W3C Blog",
+    "language": "en",
+    "categories": ["web standards", "accessibility", "sustainability"]
+  },
+  {
+    "url": "https://www.smashingmagazine.com/feed/",
+    "name": "Smashing Magazine",
+    "language": "en",
+    "categories": ["web development", "performance", "accessibility"]
+  },
+  {
+    "url": "https://blog.octo.com/feed/",
+    "name": "OCTO Technology",
+    "language": "fr",
+    "categories": ["tech", "architecture", "green it"]
+  }
+]

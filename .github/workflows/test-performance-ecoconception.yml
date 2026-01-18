@@ -1,0 +1,81 @@
+name: Tests de performance et éco-conception
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch: # Permet d'exécuter manuellement
+
+jobs:
+  test-performance:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start Hugo server
+        run: |
+          hugo server --port 1313 --bind 0.0.0.0 &
+          echo "Attente du démarrage du serveur Hugo..."
+          for i in {1..30}; do
+            if curl -f http://localhost:1313 > /dev/null 2>&1; then
+              echo "✅ Serveur Hugo prêt !"
+              break
+            fi
+            echo "Tentative $i/30..."
+            sleep 1
+          done
+        continue-on-error: false
+
+      - name: Run performance and eco-conception tests
+        id: test-performance
+        run: npm run test:performance:ci
+        env:
+          BASE_URL: http://localhost:1313
+        continue-on-error: true
+
+      - name: Display test summary
+        if: always()
+        run: |
+          if [ -f "$GITHUB_STEP_SUMMARY" ]; then
+            echo "✅ Résumé des tests disponible dans l'onglet Summary de cette action"
+          fi
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-ecoconception-results
+          path: |
+            performance-ecoconception-report-*.json
+            performance-ecoconception-report-*.html
+          retention-days: 7
+
+      - name: Check test results
+        if: steps.test-performance.outcome == 'failure'
+        run: |
+          echo "❌ Les tests de performance et d'éco-conception ont échoué. Consultez le résumé ci-dessus pour plus de détails."
+          exit 1

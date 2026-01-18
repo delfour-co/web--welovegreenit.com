@@ -1,0 +1,128 @@
+{{ $article := .article | default . }}
+{{ $index := .index | default 999 }}
+{{ $categories := $article.Params.categories | default slice }}
+{{ $normalizedCategories := slice }}
+{{ range $categories }}
+    {{ if eq (printf "%T" .) "string" }}
+        {{/* Filter out POLICY_AREA and other raw metadata */}}
+        {{ if not (hasPrefix . "POLICY_AREA") }}
+            {{ $normalizedCategories = $normalizedCategories | append . }}
+        {{ end }}
+    {{ else if eq (printf "%T" .) "map[string]interface {}" }}
+        {{ if isset . "_" }}
+            {{ $cat := index . "_" }}
+            {{ if not (hasPrefix $cat "POLICY_AREA") }}
+                {{ $normalizedCategories = $normalizedCategories | append $cat }}
+            {{ end }}
+        {{ else }}
+            {{ range $key, $value := . }}
+                {{ if eq (printf "%T" $value) "string" }}
+                    {{ if not (hasPrefix $value "POLICY_AREA") }}
+                        {{ $normalizedCategories = $normalizedCategories | append $value }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $date := $article.Date | default $article.PublishDate }}
+{{ $formattedDate := $date | time.Format "2 Jan 2006" }}
+{{ $now := now }}
+{{ $diffDays := div (sub $now.Unix $date.Unix) 86400 }}
+{{ $timeAgo := "" }}
+{{ if eq $diffDays 0 }}
+    {{ $timeAgo = "Aujourd'hui" }}
+{{ else if eq $diffDays 1 }}
+    {{ $timeAgo = "Hier" }}
+{{ else if lt $diffDays 7 }}
+    {{ $timeAgo = printf "Il y a %d jours" $diffDays }}
+{{ else }}
+    {{ $timeAgo = $formattedDate }}
+{{ end }}
+
+{{ $source := $article.Params.source | default "Inconnu" }}
+{{ $sourceHash := len $source }}
+{{ $colors := slice "bg-blue-100 text-blue-800" "bg-purple-100 text-purple-800" "bg-pink-100 text-pink-800" "bg-indigo-100 text-indigo-800" "bg-cyan-100 text-cyan-800" "bg-emerald-100 text-emerald-800" }}
+{{ $colorIndex := mod $sourceHash (len $colors) }}
+{{ $sourceColor := index $colors $colorIndex }}
+
+<article class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer h-full flex flex-col">
+    {{ $imageUrl := $article.Params.image | default "" }}
+    {{ $isDefaultImage := not $imageUrl }}
+    {{ if not $imageUrl }}
+        {{ $defaultImage := resources.Get "img/default.svg" }}
+        {{ if $defaultImage }}
+            {{ $imageUrl = $defaultImage.RelPermalink }}
+        {{ else }}
+            {{ $imageUrl = "/img/default.svg" }}
+        {{ end }}
+        {{ end }}
+    <a href="{{ $article.Params.link | default $article.RelPermalink }}" target="_blank" rel="noopener noreferrer" class="flex h-full flex-col overflow-hidden rounded-2xl">
+        <div class="w-full h-48 {{ if $isDefaultImage }}bg-white dark:bg-gray-800{{ else }}bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800{{ end }} overflow-hidden relative">
+            <img 
+                src="{{ $imageUrl }}" 
+                alt="{{ $article.Title }}"
+                class="{{ if $isDefaultImage }}w-full h-full object-cover opacity-60{{ else }}w-full h-full object-cover group-hover:scale-105 transition-transform duration-500{{ end }}"
+                width="400"
+                height="192"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                loading="lazy"
+                decoding="async"
+                {{ if $article.Params.image }}
+                    onerror="this.onerror=null; this.src='{{ if resources.Get "img/default.svg" }}{{ (resources.Get "img/default.svg").RelPermalink }}{{ else }}/img/default.svg{{ end }}';"
+                {{ end }}
+            />
+        </div>
+        
+        <div class="p-6 flex flex-col flex-grow">
+            <!-- Source et Date -->
+            <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                <div class="flex items-center space-x-2 flex-wrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $sourceColor }}">
+                        {{ $source }}
+                    </span>
+                    {{ if gt (len $normalizedCategories) 0 }}
+                        <span class="text-xs text-gray-400 dark:text-gray-500">•</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 capitalize">{{ index $normalizedCategories 0 }}</span>
+                    {{ end }}
+                </div>
+                <time class="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap" datetime="{{ $date.Format "2006-01-02T15:04:05Z07:00" }}">{{ $timeAgo }}</time>
+            </div>
+
+            <!-- Titre -->
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-200">
+                {{ $article.Title }}
+            </h2>
+
+            <!-- Description -->
+            {{ if $article.Params.description }}
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
+                    {{ $article.Params.description }}
+                </p>
+            {{ end }}
+
+            <!-- Footer avec auteur et catégories -->
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700 gap-2 mt-auto">
+                <div class="flex items-center space-x-2 min-w-0">
+                    {{ if $article.Params.author }}
+                        <span class="text-xs text-gray-400 dark:text-gray-500">par</span>
+                        <span class="text-xs font-medium text-gray-700 dark:text-gray-300 truncate">{{ $article.Params.author }}</span>
+                    {{ end }}
+                </div>
+                {{ if gt (len $normalizedCategories) 1 }}
+                    <div class="flex items-center space-x-1 flex-shrink-0">
+                        {{ range first 2 (after 1 $normalizedCategories) }}
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                                {{ . }}
+                            </span>
+                        {{ end }}
+                        {{ if gt (len $normalizedCategories) 3 }}
+                            <span class="text-xs text-gray-500 dark:text-gray-400">+{{ sub (len $normalizedCategories) 3 }}</span>
+                        {{ end }}
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </a>
+</article>

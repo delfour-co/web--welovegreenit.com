@@ -1,0 +1,551 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Accessibility CSS Variables */
+:root {
+  --font-size-multiplier: 1;
+  --line-height-value: 1.5;
+  --letter-spacing-value: 0em;
+  --word-spacing-value: 0em;
+}
+
+/* Apply accessibility settings */
+html {
+  font-size: calc(1rem * var(--font-size-multiplier));
+}
+
+body,
+body * {
+  line-height: var(--line-height-value) !important;
+  letter-spacing: var(--letter-spacing-value) !important;
+  word-spacing: var(--word-spacing-value) !important;
+}
+
+/* High contrast mode */
+[data-contrast="high"] {
+  --tw-text-opacity: 1;
+}
+
+[data-contrast="high"] .text-gray-500,
+[data-contrast="high"] .text-gray-400,
+[data-contrast="high"] .text-gray-600 {
+  @apply !text-gray-900 dark:!text-gray-100;
+}
+
+[data-contrast="high"] .bg-gray-50 {
+  @apply !bg-white dark:!bg-gray-950;
+}
+
+[data-contrast="high"] .border-gray-200,
+[data-contrast="high"] .border-gray-700 {
+  @apply !border-gray-400 dark:!border-gray-500;
+}
+
+/* Dyslexia-friendly font */
+[data-dyslexia-font="true"],
+[data-dyslexia-font="true"] * {
+  font-family: 'OpenDyslexic', sans-serif !important;
+}
+
+/* Skip link */
+.skip-link {
+  @apply absolute -top-10 left-0 bg-green-600 text-white px-4 py-2 z-[100] transition-all duration-200;
+}
+
+.skip-link:focus {
+  @apply top-0;
+}
+
+/* Accessibility modal */
+.a11y-modal-overlay {
+  @apply fixed inset-0 bg-black/50 dark:bg-black/70 z-[200] opacity-0 invisible transition-all duration-200;
+}
+
+.a11y-modal-overlay.active {
+  @apply opacity-100 visible;
+}
+
+.a11y-modal {
+  @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[201]
+         w-[90vw] max-w-lg max-h-[85vh] overflow-y-auto
+         bg-white dark:bg-gray-800 rounded-xl shadow-2xl
+         scale-95 opacity-0 invisible transition-all duration-200;
+}
+
+.a11y-modal.active {
+  @apply scale-100 opacity-100 visible;
+}
+
+.a11y-modal-header {
+  @apply flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700;
+}
+
+.a11y-modal-header h2 {
+  @apply text-lg font-semibold text-gray-900 dark:text-white;
+}
+
+.a11y-modal-close {
+  @apply p-2 rounded-lg text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200
+         hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors;
+}
+
+.a11y-modal-body {
+  @apply p-4 space-y-5;
+}
+
+.setting-group {
+  @apply mb-0 w-full;
+}
+
+.setting-group > label {
+  @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2;
+}
+
+.setting-options {
+  @apply flex flex-wrap gap-2 w-full;
+}
+
+.setting-btn {
+  @apply flex-1 min-w-0 px-3 py-1.5 text-sm rounded-md border border-gray-300 dark:border-gray-600
+         bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300
+         hover:border-green-500 dark:hover:border-green-400
+         transition-all duration-200 cursor-pointer;
+}
+
+.setting-btn.active {
+  @apply bg-green-600 border-green-600 text-white;
+}
+
+.setting-checkbox {
+  @apply flex items-center gap-3;
+}
+
+.setting-checkbox input[type="checkbox"] {
+  @apply w-5 h-5 rounded border-gray-300 dark:border-gray-600
+         text-green-600 focus:ring-green-500 cursor-pointer;
+}
+
+.setting-checkbox label {
+  @apply text-sm text-gray-700 dark:text-gray-300 cursor-pointer;
+}
+
+.a11y-modal-footer {
+  @apply p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  /* =====================================================
+     PROSE CONTENT - Base Styles
+     ===================================================== */
+  .prose-content {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  .prose-content h2 {
+    @apply text-2xl font-semibold text-gray-900 dark:text-white mt-10 mb-4 pb-2
+           border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .prose-content h3 {
+    @apply text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-3;
+  }
+
+  .prose-content h4 {
+    @apply text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-2;
+  }
+
+  .prose-content p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose-content ul {
+    @apply list-disc ml-6 mb-4 space-y-2;
+  }
+
+  .prose-content ol {
+    @apply list-decimal ml-6 mb-4 space-y-2;
+  }
+
+  .prose-content li {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  .prose-content li > ul,
+  .prose-content li > ol {
+    @apply mt-2 mb-0;
+  }
+
+  .prose-content a {
+    @apply text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300
+           underline decoration-green-600/30 dark:decoration-green-400/30
+           hover:decoration-green-600 dark:hover:decoration-green-400
+           transition-colors duration-200;
+  }
+
+  .prose-content strong {
+    @apply font-semibold text-gray-900 dark:text-white;
+  }
+
+  .prose-content em {
+    @apply italic;
+  }
+
+  /* =====================================================
+     TABLES - Responsive & Styled
+     ===================================================== */
+  .prose-content .table-wrapper {
+    @apply w-full overflow-x-auto mb-6 rounded-lg border border-gray-200 dark:border-gray-700;
+  }
+
+  .prose-content table {
+    @apply w-full min-w-full text-sm;
+  }
+
+  .prose-content thead {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+
+  .prose-content th {
+    @apply px-4 py-3 text-left font-semibold text-gray-900 dark:text-white
+           border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .prose-content td {
+    @apply px-4 py-3 border-b border-gray-100 dark:border-gray-800;
+  }
+
+  .prose-content tbody tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .prose-content tbody tr:hover {
+    @apply bg-gray-50 dark:bg-gray-800/50;
+  }
+
+  .prose-content tbody tr:nth-child(even) {
+    @apply bg-gray-50/50 dark:bg-gray-800/30;
+  }
+
+  /* =====================================================
+     CODE BLOCKS - Inline & Block
+     ===================================================== */
+  .prose-content code {
+    @apply px-1.5 py-0.5 text-sm font-mono rounded
+           bg-gray-100 dark:bg-gray-800
+           text-green-700 dark:text-green-400
+           border border-gray-200 dark:border-gray-700
+           break-words;
+  }
+
+  .prose-content pre {
+    @apply mb-6 p-3 sm:p-4 rounded-lg overflow-x-auto
+           bg-gray-900 dark:bg-gray-950
+           border border-gray-700 dark:border-gray-600
+           text-xs sm:text-sm
+           max-w-full;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .prose-content pre code {
+    @apply p-0 bg-transparent border-0 text-gray-100 dark:text-gray-200
+           text-xs sm:text-sm whitespace-pre;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  /* Code block wrapper for better mobile handling */
+  .prose-content .highlight {
+    @apply max-w-full overflow-hidden rounded-lg mb-6;
+  }
+
+  .prose-content .highlight pre {
+    @apply mb-0 rounded-none;
+  }
+
+  /* Ensure code doesn't overflow container on mobile */
+  @media (max-width: 640px) {
+    .prose-content pre {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+    }
+
+    .prose-content .highlight {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      border-radius: 0;
+    }
+  }
+
+  /* =====================================================
+     BLOCKQUOTES - Styled Quotes
+     ===================================================== */
+  .prose-content blockquote {
+    @apply my-6 pl-4 py-2 border-l-4 border-green-500 dark:border-green-400
+           bg-green-50 dark:bg-green-900/20 rounded-r-lg;
+  }
+
+  .prose-content blockquote p {
+    @apply text-gray-700 dark:text-gray-300 italic mb-0;
+  }
+
+  .prose-content blockquote cite {
+    @apply block mt-2 text-sm text-gray-600 dark:text-gray-400 not-italic;
+  }
+
+  /* =====================================================
+     HORIZONTAL RULES
+     ===================================================== */
+  .prose-content hr {
+    @apply my-8 border-0 h-px bg-gradient-to-r
+           from-transparent via-gray-300 dark:via-gray-600 to-transparent;
+  }
+
+  /* =====================================================
+     IMAGES
+     ===================================================== */
+  .prose-content img {
+    @apply max-w-full h-auto rounded-lg shadow-md my-6;
+  }
+
+  .prose-content figure {
+    @apply my-6;
+  }
+
+  .prose-content figcaption {
+    @apply mt-2 text-center text-sm text-gray-600 dark:text-gray-400 italic;
+  }
+
+  /* =====================================================
+     DEFINITION LISTS
+     ===================================================== */
+  .prose-content dl {
+    @apply mb-6;
+  }
+
+  .prose-content dt {
+    @apply font-semibold text-gray-900 dark:text-white mt-4;
+  }
+
+  .prose-content dd {
+    @apply ml-4 text-gray-700 dark:text-gray-300;
+  }
+
+  /* =====================================================
+     TABLE OF CONTENTS - Sidebar
+     ===================================================== */
+  .toc-sidebar {
+    @apply sticky top-24;
+  }
+
+  .toc-sidebar h3 {
+    @apply text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wide mb-3;
+  }
+
+  .toc-sidebar nav {
+    @apply space-y-1 max-h-[calc(100vh-12rem)] overflow-y-auto pr-2;
+  }
+
+  .toc-sidebar nav::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .toc-sidebar nav::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800 rounded;
+  }
+
+  .toc-sidebar nav::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded hover:bg-gray-400 dark:hover:bg-gray-500;
+  }
+
+  .toc-link {
+    @apply block py-1.5 px-3 text-sm text-gray-600 dark:text-gray-400
+           rounded-md transition-all duration-200
+           hover:text-green-600 dark:hover:text-green-400
+           hover:bg-gray-100 dark:hover:bg-gray-800;
+  }
+
+  .toc-link.active {
+    @apply text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30
+           border-l-2 border-green-500 font-medium;
+  }
+
+  .toc-link-h3 {
+    @apply pl-6 text-xs;
+  }
+
+  /* =====================================================
+     MOBILE TABLE OF CONTENTS
+     ===================================================== */
+  .mobile-toc {
+    @apply lg:hidden fixed bottom-20 right-4 z-40;
+  }
+
+  .mobile-toc-button {
+    @apply w-12 h-12 rounded-full bg-green-600 text-white shadow-lg
+           flex items-center justify-center
+           hover:bg-green-700 transition-colors duration-200;
+  }
+
+  .mobile-toc-panel {
+    @apply fixed inset-x-4 bottom-36 max-h-[60vh] overflow-y-auto
+           bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-4
+           transform transition-all duration-300
+           opacity-0 translate-y-4 pointer-events-none;
+  }
+
+  .mobile-toc-panel.active {
+    @apply opacity-100 translate-y-0 pointer-events-auto;
+  }
+
+  /* =====================================================
+     READING PROGRESS BAR
+     ===================================================== */
+  #reading-progress {
+    @apply fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50;
+  }
+
+  #reading-progress-bar {
+    @apply h-full bg-gradient-to-r from-green-500 to-green-600
+           transition-all duration-150 ease-out;
+  }
+
+  /* =====================================================
+     BACK TO TOP BUTTON
+     ===================================================== */
+  #back-to-top {
+    @apply fixed bottom-6 right-6 z-40 w-12 h-12
+           bg-gray-800 dark:bg-gray-700 text-white rounded-full shadow-lg
+           flex items-center justify-center
+           opacity-0 translate-y-4 pointer-events-none
+           transition-all duration-300
+           hover:bg-green-600 dark:hover:bg-green-500;
+  }
+
+  #back-to-top.visible {
+    @apply opacity-100 translate-y-0 pointer-events-auto;
+  }
+
+  /* =====================================================
+     NAVIGATION - Previous/Next
+     ===================================================== */
+  .nav-prev-next {
+    @apply flex flex-col sm:flex-row gap-4 mt-12 pt-8
+           border-t border-gray-200 dark:border-gray-700;
+  }
+
+  .nav-prev-next a {
+    @apply flex-1 flex items-center gap-3 p-4 rounded-xl
+           bg-gray-50 dark:bg-gray-800
+           border border-gray-200 dark:border-gray-700
+           hover:border-green-500 dark:hover:border-green-400
+           hover:bg-green-50 dark:hover:bg-green-900/20
+           transition-all duration-200 no-underline;
+  }
+
+  .nav-prev-next a:hover {
+    @apply shadow-md;
+  }
+
+  .nav-prev {
+    @apply text-left;
+  }
+
+  .nav-next {
+    @apply text-right sm:flex-row-reverse;
+  }
+
+  .nav-label {
+    @apply text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400;
+  }
+
+  .nav-title {
+    @apply text-sm font-medium text-gray-900 dark:text-white;
+  }
+
+  /* =====================================================
+     READING STATS
+     ===================================================== */
+  .reading-stats {
+    @apply flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400
+           mb-6 pb-6 border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .reading-stats span {
+    @apply flex items-center gap-1.5;
+  }
+
+  /* =====================================================
+     QUICK LINKS SIDEBAR
+     ===================================================== */
+  .quick-links {
+    @apply mt-8 pt-6 border-t border-gray-200 dark:border-gray-700;
+  }
+
+  .quick-links h4 {
+    @apply text-sm font-semibold text-gray-900 dark:text-white mb-3;
+  }
+
+  .quick-links ul {
+    @apply space-y-2;
+  }
+
+  .quick-links a {
+    @apply block text-sm text-gray-600 dark:text-gray-400
+           hover:text-green-600 dark:hover:text-green-400
+           transition-colors duration-200;
+  }
+
+  /* =====================================================
+     HIGHLIGHT BOXES - Tips, Warnings, Info
+     ===================================================== */
+  .prose-content .tip-box {
+    @apply my-6 p-4 rounded-lg border-l-4
+           bg-blue-50 dark:bg-blue-900/20
+           border-blue-500 dark:border-blue-400;
+  }
+
+  .prose-content .warning-box {
+    @apply my-6 p-4 rounded-lg border-l-4
+           bg-amber-50 dark:bg-amber-900/20
+           border-amber-500 dark:border-amber-400;
+  }
+
+  .prose-content .info-box {
+    @apply my-6 p-4 rounded-lg border-l-4
+           bg-green-50 dark:bg-green-900/20
+           border-green-500 dark:border-green-400;
+  }
+
+  /* =====================================================
+     ANCHOR LINKS - For TOC navigation
+     ===================================================== */
+  .prose-content h2[id],
+  .prose-content h3[id],
+  .prose-content h4[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  .prose-content h2[id]:hover .anchor-link,
+  .prose-content h3[id]:hover .anchor-link,
+  .prose-content h4[id]:hover .anchor-link {
+    @apply opacity-100;
+  }
+
+  .anchor-link {
+    @apply ml-2 text-gray-400 hover:text-green-600 dark:hover:text-green-400
+           opacity-0 transition-opacity duration-200;
+  }
+}

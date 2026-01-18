@@ -1,0 +1,36 @@
+{{ define "main" }}
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6 text-sm" aria-label="Fil d'Ariane">
+        <ol class="flex items-center space-x-2">
+            <li>
+                <a href="/" class="text-gray-500 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                    Accueil
+                </a>
+            </li>
+            <li class="text-gray-400 dark:text-gray-500">/</li>
+            <li class="text-gray-900 dark:text-white font-medium">{{ .Title }}</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">{{ .Title }}</h1>
+    </header>
+
+    <!-- Content -->
+    <div class="prose-content legal-content">
+        {{ .Content }}
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <a href="/" class="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Retour à l'accueil
+        </a>
+    </div>
+</article>
+{{ end }}

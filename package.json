@@ -1,0 +1,29 @@
+{
+  "name": "wlgit",
+  "version": "0.0.1",
+  "type": "module",
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "chrome-launcher": "^1.1.0",
+    "lighthouse": "^12.0.0",
+    "playwright": "^1.48.0",
+    "postcss": "^8.4.47",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.19"
+  },
+  "scripts": {
+    "dev": "GIT_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo '') hugo server",
+    "build": "GIT_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo '') hugo --minify",
+    "aggregate": "node scripts/aggregate-rss.js",
+    "purge": "node scripts/purge-articles.js",
+    "test:performance": "node scripts/test-performance-ecoconception.js",
+    "test:performance:ci": "BASE_URL=http://localhost:1313 node scripts/test-performance-ecoconception.js",
+    "test:single": "node scripts/test-single-page.js",
+    "prepare": "node scripts/install-hooks.js"
+  }
+}

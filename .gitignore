@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# Security - Fichiers sensibles
+*.key
+*.pem
+secrets
+credentials
+
+# Backup
+_backup/
+
+# Tests
+test-results/
+playwright-report/
+playwright/.cache/
+greenit-report-*.json
+greenit-report-*.html
+.lighthouseci/
+
+# Hugo
+public
+resources/_gen/
+.hugo_build.lock
+hugo_stats.json

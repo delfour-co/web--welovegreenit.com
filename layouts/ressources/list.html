@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">{{ .Title }}</h1>
+    </header>
+
+    <div class="text-gray-700 dark:text-gray-300 leading-relaxed mb-12 space-y-4">
+        <div class="prose-content">
+            {{ .Content }}
+        </div>
+    </div>
+
+    {{ $ressources := where .Site.RegularPages "Section" "ressources" }}
+    {{ if gt (len $ressources) 0 }}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+        {{ range $ressources.ByWeight }}
+        <a href="{{ .RelPermalink }}" class="block p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-400 hover:shadow-lg transition-all duration-200 group">
+            <div class="flex items-center mb-3">
+                {{ if eq .Title "Outils de mesure et d'optimisation" }}
+                <span class="text-2xl mr-3">🔧</span>
+                {{ else if eq .Title "Certifications et labels Green IT" }}
+                <span class="text-2xl mr-3">🏆</span>
+                {{ else if eq .Title "Formations Green IT et Numérique Responsable" }}
+                <span class="text-2xl mr-3">🎓</span>
+                {{ else if eq .Title "Référentiels et normes" }}
+                <span class="text-2xl mr-3">📋</span>
+                {{ else }}
+                <span class="text-2xl mr-3">📚</span>
+                {{ end }}
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">{{ .Title }}</h2>
+            </div>
+            {{ $summary := .Summary }}
+            {{ if not $summary }}
+                {{ $summary = index (split .Content "\n") 0 }}
+            {{ end }}
+            {{ if $summary }}
+            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{{ $summary | plainify | truncate 150 }}</p>
+            {{ end }}
+            <div class="mt-4 flex items-center text-green-600 dark:text-green-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                Explorer
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </div>
+        </a>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+{{ end }}

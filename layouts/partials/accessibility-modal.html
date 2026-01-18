@@ -1,0 +1,74 @@
+<!-- Accessibility Modal Overlay -->
+<div id="a11y-modal-overlay" class="a11y-modal-overlay" aria-hidden="true"></div>
+
+<!-- Accessibility Modal -->
+<div id="a11y-modal" class="a11y-modal" role="dialog" aria-modal="true" aria-labelledby="a11y-modal-title">
+    <div class="a11y-modal-header">
+        <h2 id="a11y-modal-title">Paramètres d'accessibilité</h2>
+        <button type="button" id="a11y-modal-close" class="a11y-modal-close" aria-label="Fermer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="a11y-modal-body">
+        <!-- Font Size -->
+        <div class="setting-group">
+            <label>Taille de la police</label>
+            <div class="setting-options">
+                <button type="button" class="setting-btn" data-setting="fontSize" data-value="small">Petit</button>
+                <button type="button" class="setting-btn" data-setting="fontSize" data-value="normal">Normal</button>
+                <button type="button" class="setting-btn" data-setting="fontSize" data-value="large">Grand</button>
+            </div>
+        </div>
+
+        <!-- Line Height -->
+        <div class="setting-group">
+            <label>Interligne</label>
+            <div class="setting-options">
+                <button type="button" class="setting-btn" data-setting="lineHeight" data-value="tight">Serré</button>
+                <button type="button" class="setting-btn" data-setting="lineHeight" data-value="normal">Normal</button>
+                <button type="button" class="setting-btn" data-setting="lineHeight" data-value="loose">Large</button>
+            </div>
+        </div>
+
+        <!-- Letter Spacing -->
+        <div class="setting-group">
+            <label>Espacement des lettres</label>
+            <div class="setting-options">
+                <button type="button" class="setting-btn" data-setting="letterSpacing" data-value="tight">Serré</button>
+                <button type="button" class="setting-btn" data-setting="letterSpacing" data-value="normal">Normal</button>
+                <button type="button" class="setting-btn" data-setting="letterSpacing" data-value="wide">Large</button>
+            </div>
+        </div>
+
+        <!-- Word Spacing -->
+        <div class="setting-group">
+            <label>Espacement des mots</label>
+            <div class="setting-options">
+                <button type="button" class="setting-btn" data-setting="wordSpacing" data-value="tight">Serré</button>
+                <button type="button" class="setting-btn" data-setting="wordSpacing" data-value="normal">Normal</button>
+                <button type="button" class="setting-btn" data-setting="wordSpacing" data-value="wide">Large</button>
+            </div>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="setting-group space-y-3">
+            <div class="setting-checkbox">
+                <input type="checkbox" id="high-contrast">
+                <label for="high-contrast">Contraste élevé</label>
+            </div>
+            <div class="setting-checkbox">
+                <input type="checkbox" id="dyslexia-font">
+                <label for="dyslexia-font">Police adaptée à la dyslexie</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="a11y-modal-footer">
+        <button type="button" id="reset-accessibility" class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+            Réinitialiser
+        </button>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+{{ $articles := where .Site.RegularPages "Section" "articles" }}
+
+{{ $sources := slice }}
+{{ $categories := slice }}
+{{ range $articles }}
+    {{ $source := .Params.source | default "Inconnu" }}
+    {{ if not (in $sources $source) }}
+        {{ $sources = $sources | append $source }}
+    {{ end }}
+    {{ $articleCategories := .Params.categories | default slice }}
+    {{ range $articleCategories }}
+        {{ $cat := "" }}
+        {{ if eq (printf "%T" .) "string" }}
+            {{ $cat = . }}
+        {{ else if eq (printf "%T" .) "map[string]interface {}" }}
+            {{ if isset . "_" }}
+                {{ $cat = index . "_" }}
+            {{ else }}
+                {{ range $key, $value := . }}
+                    {{ if eq (printf "%T" $value) "string" }}
+                        {{ $cat = $value }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ if and $cat (ne $cat "") (not (in $categories $cat)) }}
+            {{ $categories = $categories | append $cat }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ $sources = $sources | sort }}
+{{ $categories = $categories | sort }}
+
+<aside 
+    id="filters-sidebar" 
+    class="sidebar-filters fixed top-16 left-0 h-[calc(100vh-4rem)] w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 shadow-lg z-40 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto sidebar-hidden"
+>
+    <div class="p-4">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-gray-900 dark:text-white">Filtres</h2>
+            <div class="flex items-center space-x-2">
+                <button 
+                    id="toggle-sidebar-desktop"
+                    class="hidden lg:flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    aria-label="Masquer les filtres"
+                >
+                    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <button 
+                    id="close-sidebar"
+                    class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    aria-label="Fermer les filtres"
+                >
+                    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div id="filters-container">
+            <!-- Filtres par source avec recherche et sélection multiple -->
+            <div class="mb-4">
+                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Filtrer par source</h3>
+                <div class="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm">
+                    <!-- Barre de recherche -->
+                    <div class="p-2 border-b border-gray-200 dark:border-gray-600">
+                        <input
+                            type="text"
+                            id="source-search"
+                            placeholder="Rechercher une source..."
+                            class="w-full px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent"
+                        />
+                    </div>
+                    
+                    <!-- Liste des sources avec checkboxes -->
+                    <div class="max-h-64 overflow-y-auto p-2">
+                        <div class="space-y-1" id="sources-list">
+                            {{ range $sources }}
+                                <label class="flex items-center space-x-2 py-1 px-2 rounded hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        class="source-checkbox w-4 h-4 text-green-600 dark:text-green-400 border-gray-300 dark:border-gray-600 rounded focus:ring-green-500 dark:focus:ring-green-400 focus:ring-2 bg-white dark:bg-gray-800"
+                                        value="{{ . }}"
+                                        data-source="{{ . }}"
+                                    />
+                                    <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">{{ . }}</span>
+                                </label>
+                            {{ end }}
+                        </div>
+                        {{ if eq (len $sources) 0 }}
+                            <p class="text-sm text-gray-500 dark:text-gray-400 text-center py-3">Aucune source disponible</p>
+                        {{ end }}
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="p-2 border-t border-gray-200 dark:border-gray-600 flex flex-col gap-1.5 bg-gray-50 dark:bg-gray-800">
+                        <div class="flex items-center space-x-2">
+                            <button
+                                id="select-all-sources"
+                                class="text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium"
+                            >
+                                Tout sélectionner
+                            </button>
+                            <span class="text-gray-400 dark:text-gray-500">|</span>
+                            <button
+                                id="deselect-all-sources"
+                                class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 font-medium"
+                            >
+                                Tout désélectionner
+                            </button>
+                        </div>
+                        <span id="selected-sources-count" class="text-sm text-gray-600 dark:text-gray-400 text-center">
+                            0 sélectionnée
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtres par catégorie avec recherche et sélection multiple -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Filtrer par catégorie</h3>
+                <div class="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm">
+                    <!-- Barre de recherche -->
+                    <div class="p-2 border-b border-gray-200 dark:border-gray-600">
+                        <input
+                            type="text"
+                            id="category-search"
+                            placeholder="Rechercher une catégorie..."
+                            class="w-full px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent"
+                        />
+                    </div>
+                    
+                    <!-- Liste des catégories avec checkboxes -->
+                    <div class="max-h-64 overflow-y-auto p-2">
+                        <div class="space-y-1" id="categories-list">
+                            {{ range $categories }}
+                                <label class="flex items-center space-x-2 py-1 px-2 rounded hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        class="category-checkbox w-4 h-4 text-green-600 dark:text-green-400 border-gray-300 dark:border-gray-600 rounded focus:ring-green-500 dark:focus:ring-green-400 focus:ring-2 bg-white dark:bg-gray-800"
+                                        value="{{ . }}"
+                                        data-category="{{ . }}"
+                                    />
+                                    <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">{{ . }}</span>
+                                </label>
+                            {{ end }}
+                        </div>
+                        {{ if eq (len $categories) 0 }}
+                            <p class="text-sm text-gray-500 dark:text-gray-400 text-center py-3">Aucune catégorie disponible</p>
+                        {{ end }}
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="p-2 border-t border-gray-200 dark:border-gray-600 flex flex-col gap-1.5 bg-gray-50 dark:bg-gray-800">
+                        <div class="flex items-center space-x-2">
+                            <button
+                                id="select-all-categories"
+                                class="text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium"
+                            >
+                                Tout sélectionner
+                            </button>
+                            <span class="text-gray-400 dark:text-gray-500">|</span>
+                            <button
+                                id="deselect-all-categories"
+                                class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 font-medium"
+                            >
+                                Tout désélectionner
+                            </button>
+                        </div>
+                        <span id="selected-count" class="text-sm text-gray-600 dark:text-gray-400 text-center">
+                            0 sélectionnée
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<style>
+    /* Sidebar masquée par défaut */
+    .sidebar-filters.sidebar-hidden {
+        transform: translateX(-100%);
+    }
+    /* Sidebar visible quand elle n'est pas masquée */
+    .sidebar-filters:not(.sidebar-hidden) {
+        transform: translateX(0);
+    }
+</style>

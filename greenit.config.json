@@ -1,0 +1,17 @@
+{
+  "comment": "Configuration des tests d'éco-responsabilité",
+  "performance": 65,
+  "accessibility": 90,
+  "bestPractices": 80,
+  "seo": 90,
+  "maxPageSize": 10000,
+  "maxTotalRequests": 100,
+  "maxImageSize": 5000,
+  "maxCarbonFootprint": 5.0,
+  "urls": [
+    "/",
+    "/metiers/",
+    "/about/"
+  ],
+  "port": 1313
+}
