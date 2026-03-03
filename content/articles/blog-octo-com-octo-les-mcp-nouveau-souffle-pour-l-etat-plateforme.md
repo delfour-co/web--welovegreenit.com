@@ -11,6 +11,7 @@ categories:
   - "Numérique Responsable"
   - "Product  and  Design"
   - "Data  and  AI"
+  - "Software Engineering"
   - "Architecture"
 draft: false
 ---
